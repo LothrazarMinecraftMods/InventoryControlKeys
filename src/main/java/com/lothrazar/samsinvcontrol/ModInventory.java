@@ -46,7 +46,7 @@ public class ModInventory
 	public static final String NAME = "Sam's Keys and Macros";
 	@Instance(value = MODID)
 	public static ModInventory instance;
-	@SidedProxy(clientSide="com.lothrazar.samskeys.samsinvcontrol.ClientProxy", serverSide="com.lothrazar.samsinvcontrol.proxy.CommonProxy")
+	@SidedProxy(clientSide="com.lothrazar.samsinvcontrol.proxy.ClientProxy", serverSide="com.lothrazar.samsinvcontrol.proxy.CommonProxy")
 	public static CommonProxy proxy;   
 	public static Logger logger; 
 	public static SimpleNetworkWrapper network;  
