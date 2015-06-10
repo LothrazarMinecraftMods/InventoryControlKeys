@@ -37,13 +37,11 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
   
-@Mod(modid = ModInventory.MODID, version = ModInventory.VERSION,	name = ModInventory.NAME, useMetadata = true )  
+@Mod(modid = ModInventory.MODID, useMetadata=true)  
 public class ModInventory
 {
 	public static final String MODID = "samsinvcontrol"; 
-	public static final String TEXTURE_LOCATION = MODID + ":";
-	public static final String VERSION = "1.8-1.0.0";
-	public static final String NAME = "Sam's Keys and Macros";
+	public static final String TEXTURE_LOCATION = MODID + ":"; 
 	@Instance(value = MODID)
 	public static ModInventory instance;
 	@SidedProxy(clientSide="com.lothrazar.samsinvcontrol.proxy.ClientProxy", serverSide="com.lothrazar.samsinvcontrol.proxy.CommonProxy")
