@@ -1,25 +1,9 @@
 package com.lothrazar.samsinvcontrol;
 
-import java.util.ArrayList; 
-
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;     
 import com.lothrazar.samsinvcontrol.proxy.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,7 +11,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -77,16 +60,16 @@ public class ModInventory
         }        
         else if(ClientProxy.keyShiftDown.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyShiftDown.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotDown(ClientProxy.keyShiftDown.getKeyCode()));  
         }      
-        else if(ClientProxy.keyBarDown.isPressed() )
-        { 	      
-        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyBarDown.getKeyCode()));  
-        }  
         else if(ClientProxy.keyBarUp.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyBarUp.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageBarUp(ClientProxy.keyBarUp.getKeyCode()));  
         }   
+        else if(ClientProxy.keyBarDown.isPressed() )
+        { 	      
+        	 ModInventory.network.sendToServer( new MessageBarDown(ClientProxy.keyBarDown.getKeyCode()));  
+        }  
 
     } 
 }
