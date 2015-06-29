@@ -8,28 +8,23 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class MessageBarUp implements IMessage, IMessageHandler<MessageBarUp, IMessage>
 {
-	private byte keyPressed;
+	//private byte keyPressed;
 	  
 	public static final int ID = 3;
 	public MessageBarUp()
 	{ 
 	}
-	
-	public MessageBarUp(int keyCode)
-	{ 
-		this.keyPressed = (byte)keyCode;
-	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.keyPressed = buf.readByte();
+		//this.keyPressed = buf.readByte();
 	}
 	
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeByte(keyPressed);
+		//buf.writeByte(keyPressed);
 	}
 	
 	@Override

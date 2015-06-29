@@ -8,28 +8,23 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class MessageSlotDown implements IMessage, IMessageHandler<MessageSlotDown, IMessage>
 {
-	private byte keyPressed;
+	//private byte keyPressed;
 	  
 	public static final int ID = 2;
 	public MessageSlotDown()
 	{ 
 	}
-	
-	public MessageSlotDown(int keyCode)
-	{ 
-		this.keyPressed = (byte)keyCode;
-	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.keyPressed = buf.readByte();
+		//this.keyPressed = buf.readByte();
 	}
 	
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeByte(keyPressed);
+		//buf.writeByte(keyPressed);
 	}
 	
 	@Override

@@ -56,19 +56,19 @@ public class ModInventory
     {   
         if(ClientProxy.keyShiftUp.isPressed() )
         { 	     
-        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyShiftUp.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotUp());  //ClientProxy.keyShiftUp.getKeyCode()
         }        
         else if(ClientProxy.keyShiftDown.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageSlotDown(ClientProxy.keyShiftDown.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotDown());  
         }      
         else if(ClientProxy.keyBarUp.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageBarUp(ClientProxy.keyBarUp.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageBarUp());  
         }   
         else if(ClientProxy.keyBarDown.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageBarDown(ClientProxy.keyBarDown.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageBarDown());  
         }  
 
     } 
