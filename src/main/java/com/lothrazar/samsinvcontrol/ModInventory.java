@@ -3,11 +3,8 @@ package com.lothrazar.samsinvcontrol;
 import java.util.ArrayList; 
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;    
-
-import com.lothrazar.samsinvcontrol.proxy.ClientProxy;
-import com.lothrazar.samsinvcontrol.proxy.CommonProxy;
-import com.lothrazar.samsinvcontrol.proxy.MessageKeyPressed;
+import org.apache.logging.log4j.Logger;     
+import com.lothrazar.samsinvcontrol.proxy.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -56,9 +53,13 @@ public class ModInventory
 	
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
-    	network.registerMessage(MessageKeyPressed.class, MessageKeyPressed.class, MessageKeyPressed.ID, Side.SERVER);
+    	network.registerMessage(MessageSlotUp.class, MessageSlotUp.class, MessageSlotUp.ID, Side.SERVER);
+    	network.registerMessage(MessageSlotDown.class, MessageSlotDown.class, MessageSlotDown.ID, Side.SERVER);
+    	network.registerMessage(MessageBarUp.class, MessageBarUp.class, MessageBarUp.ID, Side.SERVER);
+    	network.registerMessage(MessageBarDown.class, MessageBarDown.class, MessageBarDown.ID, Side.SERVER);
 
-		this.registerEventHandlers();  
+		FMLCommonHandler.instance().bus().register(instance); 
+		MinecraftForge.EVENT_BUS.register(instance);   
 	}
         
 	@EventHandler
@@ -67,121 +68,25 @@ public class ModInventory
 		proxy.registerRenderers();
 	}
 
-	private void registerEventHandlers() 
-	{ 
-		FMLCommonHandler.instance().bus().register(instance); 
-		MinecraftForge.EVENT_BUS.register(instance);   
-	}
-	
-	public static void incrementPlayerIntegerNBT(EntityPlayer player, String prop, int inc)
-	{
-		int prev = player.getEntityData().getInteger(prop);
-		prev += inc; 
-		player.getEntityData().setInteger(prop, prev);
-	}
-   
 	@SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) 
     {   
         if(ClientProxy.keyShiftUp.isPressed() )
         { 	     
-        	 ModInventory.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftUp.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyShiftUp.getKeyCode()));  
         }        
         else if(ClientProxy.keyShiftDown.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageKeyPressed(ClientProxy.keyShiftDown.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyShiftDown.getKeyCode()));  
         }      
         else if(ClientProxy.keyBarDown.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarDown.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyBarDown.getKeyCode()));  
         }  
         else if(ClientProxy.keyBarUp.isPressed() )
         { 	      
-        	 ModInventory.network.sendToServer( new MessageKeyPressed(ClientProxy.keyBarUp.getKeyCode()));  
+        	 ModInventory.network.sendToServer( new MessageSlotUp(ClientProxy.keyBarUp.getKeyCode()));  
         }   
 
     } 
-	
-	public static void playSoundAt(World world,BlockPos pos, String sound)
-	{ 
-		world.playSound(pos.getX(), pos.getY(), pos.getZ(), sound, 1.0F, 1.0F, false);
-	}
-	
-	public static ArrayList<Block> getBlockListFromCSV(String csv)
-	{
-		 ArrayList<Block> blocks = new ArrayList<Block>();
-		 String[] ids = csv.split(",");  
-		 Block b; 
-		 
-		 for(String id : ids)
-		 {
-			 b = Block.getBlockFromName(id);
-			 
-			 if(b == null)
-			 {
-				 ModInventory.logger.log(Level.WARN, "getBlockListFromCSV : Block not found : "+id);
-			 }
-			 else 
-			 {
-				 blocks.add(b);
-			 }
-		 } 
-		 
-		 return blocks;
-	}
-	public static void playSoundAt(Entity player, String sound)
-	{ 
-		player.worldObj.playSoundAtEntity(player, sound, 1.0F, 1.0F);
-	}
- 
-	public static String lang(String name)
-	{
-		return StatCollector.translateToLocal(name);
-	}
-
-	public static void addChatMessage(String string) 
-	{ 
-		addChatMessage(new ChatComponentTranslation(string)); 
-	}
-	public static void addChatMessage(IChatComponent string) 
-	{ 
-		 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(string); 
-	}
-	public static void addChatMessage(EntityPlayer player,String string) 
-	{ 
-		player.addChatMessage(new ChatComponentTranslation(string));
-	}
-	
-	public static EnumFacing getPlayerFacing(EntityPlayer player) 
-	{
-    	int yaw = (int)player.rotationYaw;
-
-        if (yaw<0)              //due to the yaw running a -360 to positive 360
-           yaw+=360;    //not sure why it's that way
-
-        yaw += 22;     //centers coordinates you may want to drop this line
-        yaw %= 360;  //and this one if you want a strict interpretation of the zones
-
-        int facing = yaw/45;   //  360degrees divided by 45 == 8 zones
-       
-		return EnumFacing.getHorizontal( facing/2 );
-	}
-	public static void spawnParticle(World world, EnumParticleTypes type, BlockPos pos)
-	{
-		spawnParticle(world,type,pos.getX(),pos.getY(),pos.getZ());
-	}
-
-	public static void spawnParticle(World world, EnumParticleTypes type, double x, double y, double z)
-	{ 
-		//http://www.minecraftforge.net/forum/index.php?topic=9744.0
-		for(int countparticles = 0; countparticles <= 10; ++countparticles)
-		{
-			world.spawnParticle(type, x + (world.rand.nextDouble() - 0.5D) * (double)0.8, y + world.rand.nextDouble() * (double)1.5 - (double)0.1, z + (world.rand.nextDouble() - 0.5D) * (double)0.8, 0.0D, 0.0D, 0.0D);
-		} 
-    }
-	public static void execute(EntityPlayer player, String cmd)
-	{
-		MinecraftServer.getServer().getCommandManager().executeCommand(player, cmd);
-	}
-
 }
