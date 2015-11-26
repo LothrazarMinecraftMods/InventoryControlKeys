@@ -2,7 +2,7 @@ package com.lothrazar.samsinvcontrol.proxy;
 
 import org.lwjgl.input.Keyboard;   
 
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.client.settings.KeyBinding;
 
 public class ClientProxy extends CommonProxy 
