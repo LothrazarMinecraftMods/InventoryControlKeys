@@ -1,9 +1,7 @@
 package com.lothrazar.samsinvcontrol;
 
-import org.apache.logging.log4j.Logger;     
-
+import com.lothrazar.samsinvcontrol.net.*;
 import com.lothrazar.samsinvcontrol.proxy.*;
- 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,15 +23,12 @@ public class ModInventory
 	@Instance(value = MODID)
 	public static ModInventory instance;
 	@SidedProxy(clientSide="com.lothrazar.samsinvcontrol.proxy.ClientProxy", serverSide="com.lothrazar.samsinvcontrol.proxy.CommonProxy")
-	public static CommonProxy proxy;   
-	public static Logger logger; 
+	public static CommonProxy proxy;  
 	public static SimpleNetworkWrapper network;  
   
 	@EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{ 
-		logger = event.getModLog();  
-	
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
     	int packetID = 0;

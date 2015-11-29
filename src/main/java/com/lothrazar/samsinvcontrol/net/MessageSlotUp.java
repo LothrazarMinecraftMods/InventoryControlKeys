@@ -1,5 +1,7 @@
-package com.lothrazar.samsinvcontrol.proxy;
+package com.lothrazar.samsinvcontrol.net;
  
+import com.lothrazar.samsinvcontrol.UtilPlayerInventory;
+
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;

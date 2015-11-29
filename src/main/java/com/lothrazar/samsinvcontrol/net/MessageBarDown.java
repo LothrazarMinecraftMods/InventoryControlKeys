@@ -1,4 +1,6 @@
-package com.lothrazar.samsinvcontrol.proxy;
+package com.lothrazar.samsinvcontrol.net;
+ 
+import com.lothrazar.samsinvcontrol.UtilPlayerInventory;
 
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -6,10 +8,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class MessageSlotDown implements IMessage, IMessageHandler<MessageSlotDown, IMessage>
+public class MessageBarDown implements IMessage, IMessageHandler<MessageBarDown, IMessage>
 {
-	public MessageSlotDown()	{ 	}
-
+	public MessageBarDown()	{ 	}
+	
 	@Override
 	public void fromBytes(ByteBuf buf)	{	}
 	
@@ -17,12 +19,12 @@ public class MessageSlotDown implements IMessage, IMessageHandler<MessageSlotDow
 	public void toBytes(ByteBuf buf)	{	}
 	
 	@Override
-	public IMessage onMessage(MessageSlotDown message, MessageContext ctx)
+	public IMessage onMessage(MessageBarDown message, MessageContext ctx)
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
- 
-		UtilPlayerInventory.shiftSlotDown(player, player.inventory.currentItem); 
-		 
+		
+		UtilPlayerInventory.shiftBarDown(player);
+ 	
 		return null;
 	}
 }

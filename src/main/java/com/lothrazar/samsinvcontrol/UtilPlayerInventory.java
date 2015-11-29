@@ -1,11 +1,10 @@
-package com.lothrazar.samsinvcontrol.proxy;
+package com.lothrazar.samsinvcontrol;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class UtilPlayerInventory 
 {
-
 	final static int width = 9;
 	public static void shiftSlotDown(EntityPlayer player, int currentItem) 
 	{
