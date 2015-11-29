@@ -3,10 +3,7 @@ package com.lothrazar.samsinvcontrol;
 import org.apache.logging.log4j.Logger;     
 
 import com.lothrazar.samsinvcontrol.proxy.*;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+ 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -39,10 +36,11 @@ public class ModInventory
 	
     	network = NetworkRegistry.INSTANCE.newSimpleChannel( MODID );     	
     	
-    	network.registerMessage(MessageSlotUp.class, MessageSlotUp.class, MessageSlotUp.ID, Side.SERVER);
-    	network.registerMessage(MessageSlotDown.class, MessageSlotDown.class, MessageSlotDown.ID, Side.SERVER);
-    	network.registerMessage(MessageBarUp.class, MessageBarUp.class, MessageBarUp.ID, Side.SERVER);
-    	network.registerMessage(MessageBarDown.class, MessageBarDown.class, MessageBarDown.ID, Side.SERVER);
+    	int packetID = 0;
+    	network.registerMessage(MessageSlotUp.class, MessageSlotUp.class, packetID++, Side.SERVER);
+    	network.registerMessage(MessageSlotDown.class, MessageSlotDown.class, packetID++, Side.SERVER);
+    	network.registerMessage(MessageBarUp.class, MessageBarUp.class, packetID++, Side.SERVER);
+    	network.registerMessage(MessageBarDown.class, MessageBarDown.class, packetID++, Side.SERVER);
 
 		MinecraftForge.EVENT_BUS.register(instance);   
 	}
@@ -53,9 +51,6 @@ public class ModInventory
 		proxy.registerRenderers();
 	}
 
-	public void addChat(EntityPlayer p,String s){
-		p.addChatMessage(new ChatComponentText(s));
-	}
 	@SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) 
     {   
