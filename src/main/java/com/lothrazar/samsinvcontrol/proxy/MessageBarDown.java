@@ -1,5 +1,7 @@
 package com.lothrazar.samsinvcontrol.proxy;
 
+import com.lothrazar.samsinvcontrol.ModInventory;
+
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -32,6 +34,7 @@ public class MessageBarDown implements IMessage, IMessageHandler<MessageBarDown,
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
  
+		ModInventory.instance.addChat(player, "Message bar down start");
 		UtilPlayerInventory.shiftSlotDown(player, 0); 
 		UtilPlayerInventory.shiftSlotDown(player, 1); 
 		UtilPlayerInventory.shiftSlotDown(player, 2); 
@@ -41,6 +44,7 @@ public class MessageBarDown implements IMessage, IMessageHandler<MessageBarDown,
 		UtilPlayerInventory.shiftSlotDown(player, 6); 
 		UtilPlayerInventory.shiftSlotDown(player, 7); 
 		UtilPlayerInventory.shiftSlotDown(player, 8); 
+		ModInventory.instance.addChat(player, "Message bar down end");
  	
 		return null;
 	}

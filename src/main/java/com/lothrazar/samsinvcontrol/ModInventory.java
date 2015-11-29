@@ -1,8 +1,12 @@
 package com.lothrazar.samsinvcontrol;
 
 import org.apache.logging.log4j.Logger;     
+
 import com.lothrazar.samsinvcontrol.proxy.*;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -49,12 +53,16 @@ public class ModInventory
 		proxy.registerRenderers();
 	}
 
+	public void addChat(EntityPlayer p,String s){
+		p.addChatMessage(new ChatComponentText(s));
+	}
 	@SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) 
     {   
+		
         if(ClientProxy.keyShiftUp.isPressed() )
         { 	     
-        	 ModInventory.network.sendToServer( new MessageSlotUp());  //ClientProxy.keyShiftUp.getKeyCode()
+        	 ModInventory.network.sendToServer( new MessageSlotUp()); 
         }        
         else if(ClientProxy.keyShiftDown.isPressed() )
         { 	      
@@ -68,6 +76,5 @@ public class ModInventory
         { 	      
         	 ModInventory.network.sendToServer( new MessageBarDown());  
         }  
-
     } 
 }

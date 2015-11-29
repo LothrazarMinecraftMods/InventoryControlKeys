@@ -1,5 +1,7 @@
 package com.lothrazar.samsinvcontrol.proxy;
 
+import com.lothrazar.samsinvcontrol.ModInventory;
+
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -18,7 +20,6 @@ public class MessageSlotUp implements IMessage, IMessageHandler<MessageSlotUp, I
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		//this.keyPressed = buf.readByte();
 	}
 	
 	@Override
@@ -31,12 +32,12 @@ public class MessageSlotUp implements IMessage, IMessageHandler<MessageSlotUp, I
 	public IMessage onMessage(MessageSlotUp message, MessageContext ctx)
 	{  
 		EntityPlayer player = ctx.getServerHandler().playerEntity; 
+		ModInventory.instance.addChat(player, "Message slot up start");
  
 		UtilPlayerInventory.shiftSlotUp(player, player.inventory.currentItem); 
-		 
+
+		ModInventory.instance.addChat(player, "Message slot up start");
 		return null;
 	}
-
-	
 }
  

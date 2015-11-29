@@ -37,9 +37,5 @@ public class ClientProxy extends CommonProxy
          
         keyBarDown = new KeyBinding(keyBarDownName, Keyboard.KEY_J, keyCategoryInventory); 
         ClientRegistry.registerKeyBinding(ClientProxy.keyBarDown);
-
-        
-         
 	} 
-
 }
