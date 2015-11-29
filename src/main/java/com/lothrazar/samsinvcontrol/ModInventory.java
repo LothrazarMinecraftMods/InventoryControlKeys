@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
   
-@Mod(modid = ModInventory.MODID, useMetadata=true)  
+@Mod(modid = ModInventory.MODID, useMetadata=true, updateJSON="https://raw.githubusercontent.com/LothrazarMinecraftMods/InventoryControlKeys/master/update.json")  
 public class ModInventory
 {
 	public static final String MODID = "samsinvcontrol"; 
