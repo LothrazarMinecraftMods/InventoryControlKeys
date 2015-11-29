@@ -1,0 +1,11 @@
+{
+  "homepage": "http://minecraft.curseforge.com/projects/inventory-control-keys",
+  "promos": {
+    "1.7.10-latest": "1.0.1",
+    "1.7.10-recommended": "1.0.1",
+    "1.8-latest": "1.0.1",
+    "1.8-recommended": "1.0.1",
+    "1.8.8-latest": "1.0.1",
+    "1.8.8-recommended": "1.0.1"
+  }
+}

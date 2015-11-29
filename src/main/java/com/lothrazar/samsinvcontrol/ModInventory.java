@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Logger;
 import com.lothrazar.samsinvcontrol.proxy.*;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -41,7 +40,6 @@ public class ModInventory
     	network.registerMessage(MessageBarUp.class, MessageBarUp.class, MessageBarUp.ID, Side.SERVER);
     	network.registerMessage(MessageBarDown.class, MessageBarDown.class, MessageBarDown.ID, Side.SERVER);
 
-		FMLCommonHandler.instance().bus().register(instance); 
 		MinecraftForge.EVENT_BUS.register(instance);   
 	}
         
